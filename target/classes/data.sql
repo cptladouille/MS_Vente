@@ -1,0 +1,34 @@
+INSERT INTO promotion(amount,start_date,end_date) VALUES (0.1,null,null);
+INSERT INTO promotion(amount,start_date,end_date) VALUES (0.2,null,null);
+INSERT INTO promotion(amount,start_date,end_date) VALUES (0.25,null,null);
+INSERT INTO promotion(amount,start_date,end_date) VALUES (0.50,null,null);
+
+INSERT INTO taxe(amount) VALUES (0.1);
+INSERT INTO taxe(amount) VALUES (0.05);
+
+INSERT INTO category(label,TAXE_ID) VALUES ('boxe',1);
+INSERT INTO category(label,TAXE_ID) VALUES ('football',2);
+
+INSERT INTO article(label,priceEOT,CATEGORY_ID,PROMOTION_ID) VALUES ('Sac de frappe',120,1,1);
+INSERT INTO article(label,priceEOT,CATEGORY_ID,PROMOTION_ID) VALUES ('Gants de boxe', 40,1,1);
+INSERT INTO article(label,priceEOT,CATEGORY_ID,PROMOTION_ID) VALUES ('Ballon de football', 19,2,2);
+INSERT INTO article(label,priceEOT,CATEGORY_ID,PROMOTION_ID) VALUES ('Maillot de football',  49,2,2);
+
+INSERT INTO `catalog`(label) VALUES('catalogue boxe');
+INSERT INTO `catalog`(label) VALUES('catalogue football');
+
+INSERT INTO `order_client`(order_Number,id_Client) VALUES('152485',45);
+INSERT INTO `order_client`(order_Number,id_Client) VALUES('968268',36);
+
+INSERT INTO ART_CATALOG(ID_ART,ID_CATALOG) VALUES(1,1);
+INSERT INTO ART_CATALOG(ID_ART,ID_CATALOG) VALUES(2,1);
+INSERT INTO ART_CATALOG(ID_ART,ID_CATALOG) VALUES(3,2);
+INSERT INTO ART_CATALOG(ID_ART,ID_CATALOG) VALUES(3,2);
+
+INSERT INTO ART_ORDER(ID_ART,ID_ORDER_CLIENT) VALUES(1,1);
+INSERT INTO ART_ORDER(ID_ART,ID_ORDER_CLIENT) VALUES(1,1);
+INSERT INTO ART_ORDER(ID_ART,ID_ORDER_CLIENT) VALUES(2,1);
+INSERT INTO ART_ORDER(ID_ART,ID_ORDER_CLIENT) VALUES(3,1);
+INSERT INTO ART_ORDER(ID_ART,ID_ORDER_CLIENT) VALUES(1,2);
+INSERT INTO ART_ORDER(ID_ART,ID_ORDER_CLIENT) VALUES(4,2);
+INSERT INTO ART_ORDER(ID_ART,ID_ORDER_CLIENT) VALUES(2,2);
