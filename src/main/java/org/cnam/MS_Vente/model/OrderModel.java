@@ -1,5 +1,9 @@
 package org.cnam.MS_Vente.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javafx.beans.DefaultProperty;
 
 import javax.persistence.Column;
@@ -7,9 +11,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Collection;
+import java.util.Set;
 
 
 @Entity
@@ -27,8 +34,13 @@ public class OrderModel {
     @Column(name = "idClient")
     private Long idClient;
 
-    @ManyToMany(mappedBy = "orders")
-    private Collection<ArticleModel> articles;
+    @ManyToMany
+    @JoinTable(
+            name = "ART_ORDER",
+            joinColumns = @JoinColumn(name = "ID_ORDER_CLIENT"),
+            inverseJoinColumns = @JoinColumn(name = "ID_ART"))
+    @JsonManagedReference
+    private Set<ArticleModel> articles;
 
     public OrderModel()
     {
@@ -47,7 +59,7 @@ public class OrderModel {
     }
 
 
-    public OrderModel(Long id, String orderNumber, Long idClient, Collection<ArticleModel> articles) {
+    public OrderModel(Long id, String orderNumber, Long idClient, Set<ArticleModel> articles) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.idClient = idClient;
@@ -78,11 +90,11 @@ public class OrderModel {
         this.idClient = idClient;
     }
 
-    public Collection<ArticleModel> getArticles() {
+    public Set<ArticleModel> getArticles() {
         return articles;
     }
 
-    public void setArticles(Collection<ArticleModel> articles) {
+    public void setArticles(Set<ArticleModel> articles) {
         this.articles = articles;
     }
 }

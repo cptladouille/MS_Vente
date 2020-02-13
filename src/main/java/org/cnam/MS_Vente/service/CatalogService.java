@@ -22,13 +22,13 @@ public class CatalogService {
     {
 
     }
-    public Catalog createNewArticle()
+    public Catalog getCatalog(Long id)
     {
-        CatalogModel catalogModelToCreate = new CatalogModel();
-        CatalogModel catalogModelSaved = catalogRepository.save(catalogModelToCreate);
+        CatalogModel catalogModelSaved = catalogRepository.getOne(id);
         return new Catalog(
                 catalogModelSaved.getId(),
-                catalogModelSaved.getLabel()
+                catalogModelSaved.getLabel(),
+                catalogModelSaved.getArticles()
         );
     }
 }

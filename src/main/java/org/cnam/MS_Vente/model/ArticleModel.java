@@ -1,6 +1,11 @@
 package org.cnam.MS_Vente.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.FilterJoinTable;
 
 import javax.persistence.Column;
@@ -13,7 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.util.Collection;
+import java.util.Set;
 
 
 @Entity
@@ -31,26 +36,26 @@ public class ArticleModel {
     @Column(name = "priceEOT")
     private float priceEOT;
 
-    @ManyToMany
-    @JoinTable(
-        name = "ART_ORDER",
-        joinColumns = @JoinColumn(name = "ID_ART"),
-        inverseJoinColumns = @JoinColumn(name = "ID_ORDER_CLIENT"))
-    private Collection<OrderModel> orders;
+    @ManyToMany(mappedBy = "articles")
+    @JsonBackReference
+    private Set<OrderModel> orders;
 
-    @ManyToMany
-    @JoinTable(
-            name = "ART_CATALOG",
-            joinColumns = @JoinColumn(name = "ID_ART"),
-            inverseJoinColumns = @JoinColumn(name = "ID_CATALOG")
-    )
-    private Collection<CatalogModel> catalogs;
+    @ManyToMany(mappedBy = "articles")
+    @JsonBackReference
+    private Set<CatalogModel> catalogs;
 
     @ManyToOne
+    @JsonBackReference
     private PromotionModel promotion;
 
     @ManyToOne
+    @JsonBackReference
     private CategoryModel category;
+
+    public ArticleModel()
+    {
+
+    }
 
     public ArticleModel(String label, float priceEOT) {
         this.label = label;
@@ -63,7 +68,7 @@ public class ArticleModel {
         this.priceEOT = priceEOT;
     }
 
-    public ArticleModel(Long id, String label, float priceEOT, Collection<OrderModel> orders, Collection<CatalogModel> catalogs, PromotionModel promotion, CategoryModel category) {
+    public ArticleModel(Long id, String label, float priceEOT, Set<OrderModel> orders, Set<CatalogModel> catalogs, PromotionModel promotion, CategoryModel category) {
         this.id = id;
         this.label = label;
         this.priceEOT = priceEOT;
@@ -73,7 +78,7 @@ public class ArticleModel {
         this.category = category;
     }
 
-    public ArticleModel( String label, float priceEOT, Collection<OrderModel> orders, Collection<CatalogModel> catalogs, PromotionModel promotion, CategoryModel category) {
+    public ArticleModel( String label, float priceEOT, Set<OrderModel> orders, Set<CatalogModel> catalogs, PromotionModel promotion, CategoryModel category) {
         this.label = label;
         this.priceEOT = priceEOT;
         this.orders = orders;
@@ -106,19 +111,19 @@ public class ArticleModel {
         this.priceEOT = priceEOT;
     }
 
-    public Collection<OrderModel> getOrders() {
+    public Set<OrderModel> getOrders() {
         return orders;
     }
 
-    public void setOrders(Collection<OrderModel> orders) {
+    public void setOrders(Set<OrderModel> orders) {
         this.orders = orders;
     }
 
-    public Collection<CatalogModel> getCatalogs() {
+    public Set<CatalogModel> getCatalogs() {
         return catalogs;
     }
 
-    public void setCatalogs(Collection<CatalogModel> catalogs) {
+    public void setCatalogs(Set<CatalogModel> catalogs) {
         this.catalogs = catalogs;
     }
 

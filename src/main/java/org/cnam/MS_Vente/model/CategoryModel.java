@@ -1,6 +1,11 @@
 package org.cnam.MS_Vente.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "Category")
@@ -23,9 +29,10 @@ public class CategoryModel {
 
     @Column(name = "Label")
     private String label;
-
+/*
     @OneToMany(mappedBy = "category")
-    private Collection<ArticleModel> articles;
+    @JsonBackReference
+    private Set<ArticleModel> articles;*/
 
     @ManyToOne
     @JoinColumn
@@ -38,7 +45,10 @@ public class CategoryModel {
     public CategoryModel(String label) {
         this.label = label;
     }
-
+    public CategoryModel(Long id, String label) {
+        this.id = id;
+        this.label = label;
+    }
     public Long getId() {
         return id;
     }
@@ -54,15 +64,15 @@ public class CategoryModel {
     public void setLabel(String label) {
         this.label = label;
     }
-
-    public Collection<ArticleModel> getArticles() {
+/*
+    public Set<ArticleModel> getArticles() {
         return articles;
     }
 
-    public void setArticles(Collection<ArticleModel> articles) {
+    public void setArticles(Set<ArticleModel> articles) {
         this.articles = articles;
     }
-
+*/
     public TaxeModel getTaxe() {
         return taxe;
     }

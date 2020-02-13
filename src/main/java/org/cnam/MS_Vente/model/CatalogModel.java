@@ -1,11 +1,18 @@
 package org.cnam.MS_Vente.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,8 +30,14 @@ public class CatalogModel {
     @Column(name = "Label")
     private String label;
 
-    @ManyToMany(mappedBy = "catalogs")
-    private Collection<ArticleModel> articles;
+    @ManyToMany
+    @JoinTable(
+            name = "ART_CATALOG",
+            joinColumns = @JoinColumn(name = "ID_CATALOG"),
+            inverseJoinColumns = @JoinColumn(name = "ID_ART")
+    )
+    @JsonManagedReference
+    private Set<ArticleModel> articles;
 
     public CatalogModel() {
     }
@@ -58,11 +71,11 @@ public class CatalogModel {
         this.label = label;
     }
 
-    public Collection<ArticleModel> getArticles() {
+    public Set<ArticleModel> getArticles() {
         return articles;
     }
 
-    public void setArticles(Collection<ArticleModel> articles) {
+    public void setArticles(Set<ArticleModel> articles) {
         this.articles = articles;
     }
 }
