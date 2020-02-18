@@ -34,6 +34,9 @@ public class OrderModel {
     @Column(name = "idClient")
     private Long idClient;
 
+    @Column(name ="isPaid")
+    private Boolean isPaid;
+
     @ManyToMany
     @JoinTable(
             name = "ART_ORDER",
@@ -47,22 +50,25 @@ public class OrderModel {
 
     }
 
-    public OrderModel(Long id, String orderNumber, Long idClient) {
+    public OrderModel(Long id, String orderNumber, Long idClient, Boolean isPaid) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.idClient = idClient;
+        this.isPaid = isPaid;
     }
 
-    public OrderModel(String orderNumber, Long idClient) {
+    public OrderModel(String orderNumber, Long idClient, Boolean isPaid) {
         this.orderNumber = orderNumber;
         this.idClient = idClient;
+        this.isPaid = isPaid;
     }
 
 
-    public OrderModel(Long id, String orderNumber, Long idClient, Set<ArticleModel> articles) {
+    public OrderModel(Long id, String orderNumber, Long idClient, Boolean isPaid, Set<ArticleModel> articles) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.idClient = idClient;
+        this.isPaid = isPaid;
         this.articles = articles;
     }
 
@@ -96,5 +102,13 @@ public class OrderModel {
 
     public void setArticles(Set<ArticleModel> articles) {
         this.articles = articles;
+    }
+
+    public Boolean getPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(Boolean paid) {
+        isPaid = paid;
     }
 }

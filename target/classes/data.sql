@@ -17,8 +17,8 @@ INSERT INTO article(label,priceEOT,CATEGORY_ID,PROMOTION_ID) VALUES ('Maillot de
 INSERT INTO catalog(label) VALUES('catalogue boxe');
 INSERT INTO catalog(label) VALUES('catalogue football');
 
-INSERT INTO order_client(order_Number,id_Client) VALUES('152485',45);
-INSERT INTO order_client(order_Number,id_Client) VALUES('968268',36);
+INSERT INTO order_client(order_Number,id_Client,is_Paid) VALUES('152485',45,0);
+INSERT INTO order_client(order_Number,id_Client,is_Paid) VALUES('968268',36,0);
 
 INSERT INTO ART_CATALOG(ID_ART,ID_CATALOG) VALUES(1,1);
 INSERT INTO ART_CATALOG(ID_ART,ID_CATALOG) VALUES(2,1);
