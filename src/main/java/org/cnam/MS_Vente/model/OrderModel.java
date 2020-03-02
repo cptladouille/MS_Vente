@@ -42,7 +42,7 @@ public class OrderModel {
             name = "ART_ORDER",
             joinColumns = @JoinColumn(name = "ID_ORDER_CLIENT"),
             inverseJoinColumns = @JoinColumn(name = "ID_ART"))
-    @JsonManagedReference
+    @JsonManagedReference(value = "articles")
     private Set<ArticleModel> articles;
 
     public OrderModel()
@@ -57,12 +57,18 @@ public class OrderModel {
         this.isPaid = isPaid;
     }
 
+
+    public OrderModel (Long idClient, Set<ArticleModel> articles)
+    {
+        this.idClient = idClient;
+        this.articles = articles;
+    }
+
     public OrderModel(String orderNumber, Long idClient, Boolean isPaid) {
         this.orderNumber = orderNumber;
         this.idClient = idClient;
         this.isPaid = isPaid;
     }
-
 
     public OrderModel(Long id, String orderNumber, Long idClient, Boolean isPaid, Set<ArticleModel> articles) {
         this.id = id;

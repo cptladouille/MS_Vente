@@ -37,19 +37,19 @@ public class ArticleModel {
     private float priceEOT;
 
     @ManyToMany(mappedBy = "articles")
-    @JsonBackReference
+    @JsonBackReference(value = "orders")
     private Set<OrderModel> orders;
 
     @ManyToMany(mappedBy = "articles")
-    @JsonBackReference
+    @JsonBackReference(value = "catalogs")
     private Set<CatalogModel> catalogs;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value = "promotion")
     private PromotionModel promotion;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value = "category")
     private CategoryModel category;
 
     public ArticleModel()
